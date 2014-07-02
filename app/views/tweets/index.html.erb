@@ -1,8 +1,0 @@
-<h1><%= @tweets.count %></h1>
-
-<ul>
-<% @tweets.each do |tweet| %>
-<li>@<%= tweet.attrs[:user][:screen_name]%>: <%= tweet.text %></li>
-
-<% end %>
-</ul>

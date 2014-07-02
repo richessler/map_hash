@@ -8,6 +8,6 @@ class TweetsController < ApplicationController
       config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
     end
 
-    @tweets = @client.search("Wimbledon", :result_type => "mixed").take(5_000)
+    @tweets = @client.search("#learnedatga", :result_type => "recent").take(5_000)
   end
 end

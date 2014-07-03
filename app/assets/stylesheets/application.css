@@ -15,7 +15,12 @@
  */
 
 h1 {
+  font-family: Montserrat;
   text-align: center;
+}
+
+body {
+  font-family: Montserrat;
 }
 
  .land {
@@ -47,4 +52,15 @@ h1 {
 .container {
   margin: 0 auto;
   width: 960px;
+}
+
+.form{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.submit{
+  background-color: #4099FF;
+  color: #fff;
+  font-family: Montserrat;
 }

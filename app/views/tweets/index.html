@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <body>
-
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
+
 <h1>HashMapper</h1>
-<div id="search form">
-  <%= form_tag("/tweets", method: "get") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-</div>
-<div class="container"></div>
+<% if @search_results_array %>
+  <%= @search_results_array.count %>
+<% end %>
+<%= form_tag("/tweets", method: "get", class: 'form') do %> 
+  <%= label_tag(:q, "Search for:") %> 
+  <%= text_field_tag(:q) %> 
+  <%= submit_tag("Search", class: 'submit') %> 
+<% end %>
+
+  <div class="container"></div>
+
 
 </body>
 </html>

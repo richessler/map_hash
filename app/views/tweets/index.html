@@ -8,6 +8,15 @@ path {
 }
 </style>
 <body>
+
+<h1> Tweets </h1>
+<ul>
+<% @tweets.each do |tweet| %>
+  <li>
+    <%= tweet.attrs[:user][:screen_name] %>: <%=tweet.text%>
+  </li>
+<%end%>
+</ul>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://d3js.org/topojson.v0.min.js"></script>
 

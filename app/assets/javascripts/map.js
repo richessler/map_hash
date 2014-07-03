@@ -1,58 +1,34 @@
 $(document).ready(function() {
   var width = 960,
-      height = 500;
+    height = 500;
 
-  var projection = d3.geo.mercator()
-      .center([0, 5 ])
-      .scale(150)
-      .rotate([-180,0]);
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([width / 2, height / 2]);
 
-  var svg = d3.select("body").append("svg")
-      .attr("width", width)
-      .attr("height", height);
+var path = d3.geo.path()
+    .projection(projection);
 
-  var path = d3.geo.path()
-      .projection(projection);
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-  var g = svg.append("g");
+d3.json("/us-10m.json", function(error, us) {
+  svg.insert("path", ".graticule")
+      .datum(topojson.feature(us, us.objects.land))
+      .attr("class", "land")
+      .attr("d", path);
 
-  // load and display the World
-  d3.json("/world-110m2.json", function(error, topology) {
+  svg.insert("path", ".graticule")
+      .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
+      .attr("class", "county-boundary")
+      .attr("d", path);
 
-    d3.csv("/cities.csv", function(error, data) {
-      g.selectAll("circle")
-         .data(data)
-         .enter()
-         .append("a")
-            .attr("xlink:href", function(d) {
-              return "https://www.google.com/search?q="+d.city;}
-            )
-         .append("circle")
-         .attr("cx", function(d) {
-                 return projection([d.lon, d.lat])[0];
-         })
-         .attr("cy", function(d) {
-                 return projection([d.lon, d.lat])[1];
-         })
-         .attr("r", 5)
-         .style("fill", "red");
-  });
+  svg.insert("path", ".graticule")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "state-boundary")
+      .attr("d", path);
+});
 
-  g.selectAll("path")
-      .data(topojson.object(topology, topology.objects.countries)
-        .geometries)
-      .enter()
-        .append("path")
-        .attr("d", path)
-  });
-
-  var zoom = d3.behavior.zoom()
-      .on("zoom",function() {
-          g.attr("transform","translate("+
-              d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-          g.selectAll("path")
-              .attr("d", path.projection(projection));
-  });
-
-  svg.call(zoom);
+d3.select(self.frameElement).style("height", height + "px");
 });

@@ -36,17 +36,24 @@ d3.json("/us-10m.json", function(error, us) {
       .attr("id", "state-borders")
       .attr("d", path);
 
-      d3.csv("/cities.csv", function(error, data) {
-  g.insert("circle", ".graticule")
-     .data(data)
-     .attr("cx", function(d) {
-             return projection([d.lon, d.lat])[0];
-     })
-     .attr("cy", function(d) {
-             return projection([d.lon, d.lat])[1];
-     })
-     .attr("r", 4)
-     .style("fill", "4099FF");
+d3.csv("/tweets.csv", function(error, data) {
+        g.selectAll("circle")
+           .data(data)
+           .enter()
+           .append("circle")
+           .attr("cx", function(d) {
+                  if (Math.abs(d.long) > 69.55 && Math.abs(d.long) < 120.77 && d.lat >25 && d.lat <50){
+                   return projection([d.long, d.lat])[0];
+                 }
+           })
+           .attr("cy", function(d) {
+
+                  if (Math.abs(d.long) > 69.55 && Math.abs(d.long) < 120.77 && d.lat >25 && d.lat <50) {
+                   return projection([d.long, d.lat])[1];
+                 }
+           })
+           .attr("r", 2.5)
+           .style("fill", "red");
  });
 });
 

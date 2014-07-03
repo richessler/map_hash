@@ -3,9 +3,15 @@
 <body>
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
 <h1>HashMapper</h1>
-
+<div id="search form">
+  <%= form_tag("/tweets", method: "get") do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+</div>
 <div class="container"></div>
 
 </body>

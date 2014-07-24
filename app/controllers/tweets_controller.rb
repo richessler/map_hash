@@ -9,6 +9,37 @@ class TweetsController < ApplicationController
         config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
       end
 
+    #########################################
+    #
+    #
+    # => API hit to Twitter requesting param
+    # => tweets.  Commentted out for simplicity
+    # => and data is persisted to DB.  Keeping
+    # => for later use.
+    #
+    #########################################
+    #
+    #
+    # max_count = 4
+    # count = 0
+    # while count < max_count
+    #   @tweets = @client.search("4th of july", results: 'mixed').take(1_000_000)
+    #   @tweets.each do |tweet|
+    #     if (tweet.attrs[:geo])
+    #       Tweet.create( lat:      tweet.attrs[:geo][:coordinates][0],
+    #                     long:     tweet.attrs[:geo][:coordinates][1],
+    #                     handle:   tweet.attrs[:user][:screen_name],
+    #                     link_id:  tweet.attrs[:id],
+    #                     content:  tweet.text
+    #                     )
+    #     end
+    # end
+    # count += 1
+    # end
+
+
+      ## hit API based on search results submitted by user
+
       @search_results_array = []
       max_count = 3
       count = 0

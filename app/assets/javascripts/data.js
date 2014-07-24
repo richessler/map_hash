@@ -2,8 +2,16 @@
 * @Author: Richard Hessler
 * @Date:   2014-07-03 15:57:13
 * @Last Modified by:   Richard Hessler
-* @Last Modified time: 2014-07-03 16:49:16
+* @Last Modified time: 2014-07-24 02:36:48
 */
+
+// /////////////////////////////////////////
+//
+//    AJAX Call to DB - keeping if we revisit
+//
+// /////////////////////////////////////////
+//
+//
 // var response;
 // $(document).ready(function() {
 //   $.ajax({
